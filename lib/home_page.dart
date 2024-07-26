@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc/sample1/bloc/sample_test_bloc.dart';
+import 'package:sample_bloc/sample_bloc/bloc/add_counter_bloc.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -29,14 +30,28 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Text("count = $count"),
+          BlocConsumer<AddCounterBloc, AddCounterState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              if (state is Added) {
+                count = state.number;
+                return Text("count = ${state.number}");
+              } else {
+                return Text("press the button");
+              }
+            },
+          ),
           SizedBox(
             height: 20,
           ),
           ElevatedButton(
               onPressed: () {
                 print("count = $count");
-                count++;
+
+                context.read<AddCounterBloc>().add(add(number: count));
+
                 Text(" after presscount = $count");
               },
               child: Text("add")),

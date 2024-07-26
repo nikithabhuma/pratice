@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc/home_page.dart';
 import 'package:sample_bloc/sample1/bloc/sample_test_bloc.dart';
+import 'package:sample_bloc/sample_bloc/bloc/add_counter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SampleBloc()),
+        BlocProvider(create: (_) => AddCounterBloc()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
